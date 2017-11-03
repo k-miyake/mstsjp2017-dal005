@@ -18,7 +18,7 @@ namespace EventSender
         private static readonly string EhEntityPath = ConfigurationManager.AppSettings["EhEntityPath"];
 
         [FunctionName("Sender")]
-        public static void Run([QueueTrigger("starter-items", Connection = "AzureWebJobsStorage")]string starterItem, TraceWriter log)
+        public static void Run([QueueTrigger("%AzureQueue%", Connection = "AzureWebJobsStorage")]string starterItem, TraceWriter log)
         {
             log.Info($"C# Queue trigger function processed: {starterItem}");
             MainAsync(starterItem, log).GetAwaiter().GetResult();
