@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
-using Newtonsoft.Json;
 
 namespace Starter
 {
@@ -13,15 +13,7 @@ namespace Starter
 
         static void Main(string[] args)
         {
-            int num = 0;
-            if (args.Length == 0)
-            {
-                num = 2;
-            }
-            else
-            {
-                num = int.Parse(args[0]);
-            }
+            var num = args.Length == 0 ? 2 : int.Parse(args[0]);
             Console.WriteLine("キューを" + num + "件作成します");
 
             var builder = new ConfigurationBuilder()
@@ -31,18 +23,19 @@ namespace Starter
             Configuration = builder.Build();
 
             // Create Storage Account
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Configuration["StorageConnectionString"]);
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            CloudQueue queue = queueClient.GetQueueReference("starter-items");
+            var storageAccount = CloudStorageAccount.Parse(Configuration["StorageConnectionString"]);
+            var queueClient = storageAccount.CreateCloudQueueClient();
+            var queue = queueClient.GetQueueReference(Configuration["StarterQueue"]); 
 
             // Create a message and add it to the queue.
             int i = 0;
             while (i < num)
             {
-                var eventLogs = "10000";
-                CloudQueueMessage message = new CloudQueueMessage(eventLogs);
+                var eventLogs = Configuration["NumberOfLogMessages"];
+                var message = new CloudQueueMessage(eventLogs);
                 queue.AddMessageAsync(message).Wait();
                 i++;
+                Thread.Sleep(30000);
             }
         }
     }
