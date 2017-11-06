@@ -11,5 +11,6 @@ namespace PreferredLocations
         public string Key { get; set; }
         public string DatabaseId { get; set; }
         public string CollectionId { get; set; }
+        public string AppRegion { get; set; }
     }
 }
