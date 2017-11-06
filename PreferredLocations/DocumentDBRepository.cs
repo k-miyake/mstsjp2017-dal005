@@ -34,7 +34,8 @@ namespace PreferredLocations
 
             // その他のリージョンを追加
             cp = AddPreferredLocations(cp).Result;
-            _client = new DocumentClient(new Uri(_option.Endpoint), _option.Key);
+            _client = new DocumentClient(new Uri(_option.Endpoint), _option.Key, cp);
+            _client.OpenAsync(); // パフォーマンス改善のため一度接続しておく
         }
 
         public async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate)
@@ -58,6 +59,18 @@ namespace PreferredLocations
         {
             Document document = await _client.ReadDocumentAsync(UriFactory.CreateDocumentUri(_option.DatabaseId, _option.CollectionId, id));
             return (T)(dynamic)document;
+        }
+
+        public string GetReadEndpoint()
+        {
+            var ep = _client.ReadEndpoint.Host;
+            return ep;
+        }
+
+        public string GetWriteEndpoint()
+        {
+            var ep = _client.WriteEndpoint.Host;
+            return ep;
         }
 
         // 利用可能リージョンを追加

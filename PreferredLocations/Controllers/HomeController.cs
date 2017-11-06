@@ -8,7 +8,7 @@ namespace PreferredLocations.Controllers
 {
     public class HomeController : Controller
     {
-        private AppOption _options;
+        private readonly AppOption _options;
 
         public HomeController(IOptions<AppOption> optionsAccessor)
         {
@@ -19,7 +19,14 @@ namespace PreferredLocations.Controllers
         {
             var repository = new DocumentDBRepository<Item>(_options);
             var items = await repository.GetItemsAsync(d => !d.Completed);
-            return View();
+
+            var vm = new HomeViewModel
+            {
+                Items = items,
+                WriteRegion = repository.GetWriteEndpoint(),
+                ReadRegion = repository.GetReadEndpoint()
+            };
+            return View(vm);
         }
 
         public IActionResult Error()

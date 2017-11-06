@@ -1,4 +1,6 @@
-﻿@{
+﻿@model PreferredLocations.Models.HomeViewModel
+
+@{
     ViewData["Title"] = "リージョン表示";
 }
 
@@ -6,13 +8,50 @@
     <div class="col-md-6">
         <h2>書き込みリージョン</h2>
         <div class="alert alert-danger">
-            <h3>東日本</h3>
+            <h3>@Model.WriteRegion</h3>
         </div>
     </div>
     <div class="col-md-6">
         <h2>読み取りリージョン</h2>
         <div class="alert alert-info">
-            <h3>西日本</h3>
+            <h3>@Model.ReadRegion</h3>
         </div>
     </div>
 </div>
+
+<h2>Itemsドキュメント一覧</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Completed
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Items) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Completed)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>*@
+        </tr>
+    }
+
+</table>
