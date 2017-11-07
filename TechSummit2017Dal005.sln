@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeFeed", "ChangeFeed\Ch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starter", "Starter\Starter.csproj", "{C9A304F7-81FD-4706-BF4F-FB52D8D48FF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreferredLocations", "PreferredLocations\PreferredLocations.csproj", "{101DF912-C0A9-4409-A5AB-031068C00D6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PreferredLocations", "PreferredLocations\PreferredLocations.csproj", "{101DF912-C0A9-4409-A5AB-031068C00D6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMonitor", "TodoMonitor\TodoMonitor.csproj", "{5674282B-F739-492D-8012-025FDC25A0BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{101DF912-C0A9-4409-A5AB-031068C00D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{101DF912-C0A9-4409-A5AB-031068C00D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{101DF912-C0A9-4409-A5AB-031068C00D6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5674282B-F739-492D-8012-025FDC25A0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5674282B-F739-492D-8012-025FDC25A0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5674282B-F739-492D-8012-025FDC25A0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5674282B-F739-492D-8012-025FDC25A0BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
