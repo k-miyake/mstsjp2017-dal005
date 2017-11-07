@@ -12,14 +12,14 @@ namespace Documents
         [JsonProperty(PropertyName = "id")]
         public string FirstName { get; set; }
         [JsonProperty(PropertyName = "id")]
-        public Address Address { get; set; }
+        public Address2 Address { get; set; }
         [JsonProperty(PropertyName = "id")]
         public string Title { get; set; }
         [JsonProperty(PropertyName = "id")]
-        public Contact[] Contacts { get; set; }
+        public Contact2[] Contacts { get; set; }
     }
 
-    public class Address
+    public class Address2
     {
         [JsonProperty(PropertyName = "id")]
         public string Line1 { get; set; }
@@ -33,7 +33,7 @@ namespace Documents
         public int Zip { get; set; }
     }
 
-    public class Contact
+    public class Contact2
     {
         [JsonProperty(PropertyName = "id")]
         public string Email { get; set; }
