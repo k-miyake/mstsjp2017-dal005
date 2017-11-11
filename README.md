@@ -1,6 +1,6 @@
 # mstsjp2017-dal005
 
-このリポジトリは、2017年11月9日に実施されたMicrosoft Tech Summitのセッション[Azure Cosmos DB を使った高速分散アプリケーションの設計パターン](https://www.slideshare.net/kazuyukimiyake/azure-cosmos-db-81795518)で行ったデモのソースコードです。
+このリポジトリは、2017年11月9日に実施されたMicrosoft Tech Summitのセッション[Azure Cosmos DB を使った高速分散アプリケーションの設計パターン](https://www.slideshare.net/kazuyukimiyake/azure-cosmos-db-81795518)で行ったデモのソースコードです。
 
 実行するには以下にしたがって各種設定をして下さい。
 
@@ -13,11 +13,12 @@ JSON構造に合わせたクラスが生成出来ればOKです。
 ## demo2: PreferredLocationsを設定したMVCアプリによるCosmos DBへの読み取りリージョンアクセス
 
 以下の手順でAzure Cosmos DBのコレクションを作成して下さい。
-1. Cosmos DBの新規データベースアカウントを作成
+1. Cosmos DBの新規データベースアカウントを作成
 1. クイックスタートから任意のプラットフォームを選択し、「Itemsコレクションの作成」を実行します
-1. アプリをダウンロードして適当にTodoデータを追加して下さい
-
-Cosmos DBのリージョン追加
+1. アプリをダウンロードして適当にTodoデータを追加して下さい
+
+
+Cosmos DBのリージョン追加  
 ポータルの「データをグローバルにレプリケートする」から、任意のリージョンを追加して下さい。
 
 次にAzure AppService(WebApp)のインスタンスをCosmos DBのリージョン毎に同じリージョンに1ずつ作成して下さい。プランはフリーでも大丈夫です。
@@ -28,7 +29,7 @@ WebAppのアプリケーション設定には以下のKey-Valueを設定して�
 * "Key":"{Cosmos DBのアクセスキー}",
 * "DatabaseId": "{Cosmos DBのデータベースID}",
 * "CollectionId": "Items",
-* "AppRegion": "{このWeb Appをデプロイしているリージョン名（Japan Eastなど）}"
+* "AppRegion": "{このWeb Appをデプロイしているリージョン名（Japan Eastなど）}"
 
 VisualStudioで```PreferredLocations```を各リージョンのWebAppにデプロイして下さい。
 
