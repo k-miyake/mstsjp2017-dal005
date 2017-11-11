@@ -287,5 +287,3 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 local.settings.json
-appsettings.json
-appsettings.*.json
