@@ -1,4 +1,4 @@
-# mstsjp2017-dal005
+# Azure Cosmos DBを使った高速分散アプリケーションの設計パターン - Demo用プロジェクト
 
 このリポジトリは、2017年11月9日に実施されたMicrosoft Tech Summitのセッション[Azure Cosmos DB を使った高速分散アプリケーションの設計パターン](https://www.slideshare.net/kazuyukimiyake/azure-cosmos-db-81795518)で行ったデモのソースコードです。
 
@@ -11,6 +11,8 @@
 JSON構造に合わせたクラスが生成出来ればOKです。
 
 ## demo2: PreferredLocationsを設定したMVCアプリによるCosmos DBへの読み取りリージョンアクセス
+
+このdemoは以下のようなDR構成を実現する際のCosmos DBとApp Serviceの組み合わせを実装する際のソースコード例です。
 
 以下の手順でAzure Cosmos DBのコレクションを作成して下さい。
 1. Cosmos DBの新規データベースアカウントを作成
