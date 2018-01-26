@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documents", "Documents\Documents.csproj", "{AF7FF8D2-DAE0-423A-ACCD-BFA43D629A20}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starter", "Starter\Starter.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PreferredLocations", "PreferredLocations\PreferredLocations.csproj", "{101DF912-C0A9-4409-A5AB-031068C00D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMonitor", "TodoMonitor\TodoMonitor.csproj", "{5674282B-F739-492D-8012-025FDC25A0BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoMonitor", "TodoMonitor\TodoMonitor.csproj", "{5674282B-F739-492D-8012-025FDC25A0BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
