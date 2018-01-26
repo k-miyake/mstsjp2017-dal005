@@ -1,11 +1,10 @@
 using System;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using System;
 using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.EventHubs;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace EventSender
@@ -13,38 +12,37 @@ namespace EventSender
     public static class Sender
     {
         // Event Hubs接続情報
-        private static EventHubClient eventHubClient;
+        private static EventHubClient _eventHubClient;
         private static readonly string EhConnectionString = ConfigurationManager.AppSettings["EhConnectionString"];
         private static readonly string EhEntityPath = ConfigurationManager.AppSettings["EhEntityPath"];
 
         [FunctionName("Sender")]
-        public static void Run([QueueTrigger("demo3", Connection = "AzureWebJobsStorage")]string starterItem, TraceWriter log)
+        public static void Run([QueueTrigger("demo3", Connection = "AzureWebJobsStorage")]string starterItem, ILogger logger)
         {
-            log.Info($"C# Queue trigger function processed: {starterItem}");
-            MainAsync(starterItem, log).GetAwaiter().GetResult();
+            logger.LogInformation($"C# Queue trigger function processed: {starterItem}");
+            MainAsync(starterItem, logger).GetAwaiter().GetResult();
         }
 
-        private static async Task MainAsync(string reqNum, TraceWriter log)
+        private static async Task MainAsync(string reqNum, ILogger logger)
         {
-            int req = 0;
-            int.TryParse(reqNum, out req);
+            int.TryParse(reqNum, out var req);
 
             // Event Hubクライアント設定
             var connectionStringBuilder = new EventHubsConnectionStringBuilder(EhConnectionString)
             {
                 EntityPath = EhEntityPath
             };
-            eventHubClient = EventHubClient.CreateFromConnectionString(connectionStringBuilder.ToString());
+            _eventHubClient = EventHubClient.CreateFromConnectionString(connectionStringBuilder.ToString());
 
             // メッセージ送信処理の実行
-            await SendMessagesToEventHub(req, log);
+            await SendMessagesToEventHub(req, logger);
 
             // Event Hubクライアントの終了
-            await eventHubClient.CloseAsync();
+            await _eventHubClient.CloseAsync();
         }
 
         // メッセージ送信処理
-        private static async Task SendMessagesToEventHub(int numMessagesToSend, TraceWriter log)
+        private static async Task SendMessagesToEventHub(int numMessagesToSend, ILogger logger)
         {
             var random = new Random();
 
@@ -60,18 +58,18 @@ namespace EventSender
                         CreateOn = DateTimeOffset.UtcNow.ToString("yyyy/MM/ddTHH:mm:ss.fffffffzzz"),
                     };
 
-                    log.Info($"Sending message: {i}件目メッセージを送信します");
-                    await eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message))));
+                    logger.LogInformation($"Sending message: {i}件目メッセージを送信します");
+                    await _eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message))));
                 }
                 catch (Exception exception)
                 {
-                    log.Error($"{DateTime.Now} > Exception: {exception.Message}");
+                    logger.LogError($"{DateTime.Now} > Exception: {exception.Message}");
                 }
 
                 await Task.Delay(10);
             }
 
-            log.Info($"{numMessagesToSend} messages sent.");
+            logger.LogInformation($"{numMessagesToSend} messages sent.");
         }
     }
 
