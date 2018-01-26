@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 
 namespace ChangeFeed
 {
@@ -9,17 +10,17 @@ namespace ChangeFeed
     {
         [FunctionName("EventFeed")]
         public static void Run([CosmosDBTrigger("msts2017", "eventlogs", ConnectionStringSetting = "AzureWebJobsDocumentDBConnectionString",
-                LeaseCollectionName = "leases", LeaseDatabaseName = "msts2017")]IReadOnlyList<Document> changeList, TraceWriter log)
+                LeaseCollectionName = "leases", LeaseDatabaseName = "msts2017")]IReadOnlyList<Document> changeList, ILogger logger)
         {
             if (changeList != null && changeList.Count > 0)
             {
-                log.Verbose("Documents modified " + changeList.Count);
+                logger.LogInformation("Documents modified " + changeList.Count);
                 var i = 0;
 
                 foreach (var change in changeList)
                 {
-                    log.Verbose("document Id of $i: " + change.Id);
-                    log.Verbose(change.ToString());
+                    logger.LogInformation("document Id of $i: " + change.Id);
+                    logger.LogInformation(change.ToString());
                     i++;
                 }
             }

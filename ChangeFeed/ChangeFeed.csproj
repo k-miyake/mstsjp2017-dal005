@@ -5,7 +5,7 @@
   <ItemGroup>    
     <PackageReference Include="Microsoft.Azure.WebJobs" Version="2.1.0-beta4" />    
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.DocumentDB" Version="1.1.0-beta4" />    
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.6" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.7" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
