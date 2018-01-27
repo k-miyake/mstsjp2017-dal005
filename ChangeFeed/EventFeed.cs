@@ -8,8 +8,8 @@ namespace ChangeFeed
     public static class EventFeed
     {
         [FunctionName("EventFeed")]
-        public static void Run([CosmosDBTrigger("msts2017", "eventlogs", ConnectionStringSetting = "AzureWebJobsDocumentDBConnectionString",
-                LeaseCollectionName = "leases", LeaseDatabaseName = "msts2017")]IReadOnlyList<Document> changeList, ILogger logger)
+        public static void Run([CosmosDBTrigger("msts2017db", "eventlogs", ConnectionStringSetting = "AzureWebJobsDocumentDBConnectionString",
+                LeaseCollectionName = "eventLeases" ,CreateLeaseCollectionIfNotExists = true)]IReadOnlyList<Document> changeList, ILogger logger)
         {
             if (changeList != null && changeList.Count > 0)
             {
